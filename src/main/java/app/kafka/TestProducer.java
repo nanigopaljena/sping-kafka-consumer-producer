@@ -34,17 +34,6 @@ public class TestProducer {
 
     @Scheduled(initialDelay = 10000, fixedRate = 1900)
     public void sendMessage() {
-        System.out.println("Bootstrap server: " + bootstrapServer);
-        System.out.println("Topic name: " + groupId);
-        System.out.println("groupId name: " + groupId);
-
-        if (counter >= 10) {
-            System.out.println("------------------------------");
-            System.out.println("Prodcues 10 messages, exiting at: " + new Date());
-            System.out.println("------------------------------");
-            System.exit(0); 
-        }
-
         String message = "Message number: #" + counter++;
         kafkaTemplate.send(topicName, message);
         if(counter==1){
