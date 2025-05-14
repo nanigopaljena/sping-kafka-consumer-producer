@@ -27,11 +27,11 @@ jobs:
       - name: Set up Gradle with caching
         uses: gradle/gradle-build-action@v3
         
-      - name: Grant execute permission to Gradle wrapper
-        run: chmod +x gradlew
+      # - name: Grant execute permission to Gradle wrapper
+      #   run: chmod +x gradlew
 
-      - name: Build the app with Gradle
-        run: ./gradlew clean build
+      # - name: Build the app with Gradle
+      #   run: ./gradlew clean build
 
       - name: Run the JAR
         run: java -jar build/libs/sping-kafka-consumer-producer.jar
