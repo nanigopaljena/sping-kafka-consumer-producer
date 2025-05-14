@@ -14,7 +14,7 @@ spring:
         protocol: SASL_SSL
       sasl:
         jaas:
-          config: org.apache.kafka.common.security.plain.PlainLoginModule required username="1743e416b33e189756551357b7b4a3944226169e1c73939dc7024086cacefb3a" password="b022b7d6-d8ff-4b9c-b949-74217450b128";
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username="test2" password="test3";
         mechanism: PLAIN
 
 logging:
