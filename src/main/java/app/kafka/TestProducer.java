@@ -1,0 +1,40 @@
+package app.kafka;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+@Service
+@Profile({"produce","produce-consume"})
+public class TestProducer {
+
+    @Value("${spring.kafka.topic-name}")
+    private String topicName;
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+    private int counter = 0;
+
+    TestProducer(){
+        System.out.println("------------------------------------------------");
+        System.out.println("Will wait for 10 seconds before producing...");
+        System.out.println("------------------------------------------------");
+    }
+
+    @Scheduled(initialDelay = 10000, fixedRate = 1900)
+    public void sendMessage() {
+        String message = "Message number: #" + counter++;
+        kafkaTemplate.send(topicName, message);
+        if(counter==1){
+            System.out.println("------------------------------");
+            System.out.println("Producing started at: " + new Date());
+            System.out.println("-------------------------------");
+        }
+        System.out.println("Produced: " + message);
+    }
+}
