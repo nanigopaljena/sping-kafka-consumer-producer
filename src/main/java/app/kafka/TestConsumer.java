@@ -48,10 +48,10 @@ public class TestConsumer {
         // Schedule the shutdown to occur after 10 seconds of inactivity
         shutdownTask = scheduler.schedule(() -> {
             System.out.println("------------------------------");
-            System.out.println("Exiting after 10 seconds of inactivity at: " + new Date());
+            System.out.println("Exiting after 20 seconds of inactivity at: " + new Date());
             System.out.println("------------------------------");
             System.exit(0);  // Forcefully exit the application
-        }, 10, TimeUnit.SECONDS);
+        }, 20, TimeUnit.SECONDS);
     }
 }
 

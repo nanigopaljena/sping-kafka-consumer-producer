@@ -35,10 +35,13 @@ public class TestProducer {
     @Scheduled(initialDelay = 10000, fixedRate = 1900)
     public void sendMessage() {
 
-        if (counter >= 10) {
+        if (counter == 10) {
             System.out.println("Produced 10 messages, stopping producer.");
+        }
+        if (counter >= 10) {
             return;
         }
+        
 
         String message = "Message number: #" + counter++;
         kafkaTemplate.send(topicName, message);
