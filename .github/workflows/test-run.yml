@@ -24,6 +24,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17' # Adjust if you use a different Java version
 
+      - name: Set up Gradle with caching
+        uses: gradle/gradle-build-action@v3
+        
       - name: Grant execute permission to Gradle wrapper
         run: chmod +x gradlew
 

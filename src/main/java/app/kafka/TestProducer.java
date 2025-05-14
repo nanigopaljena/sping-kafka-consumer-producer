@@ -38,6 +38,13 @@ public class TestProducer {
         System.out.println("Topic name: " + groupId);
         System.out.println("groupId name: " + groupId);
 
+        if (counter >= 10) {
+            System.out.println("------------------------------");
+            System.out.println("Prodcues 10 messages, exiting at: " + new Date());
+            System.out.println("------------------------------");
+            System.exit(0); 
+        }
+
         String message = "Message number: #" + counter++;
         kafkaTemplate.send(topicName, message);
         if(counter==1){
