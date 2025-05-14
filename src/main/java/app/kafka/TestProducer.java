@@ -28,17 +28,18 @@ public class TestProducer {
 
     TestProducer(){
         System.out.println("------------------------------------------------");
-        System.out.println("Will wait for 10 seconds before producing...");
+        System.out.println("Will wait for 5 seconds before producing...");
         System.out.println("------------------------------------------------");
     }
 
-    @Scheduled(initialDelay = 10000, fixedRate = 1900)
+    @Scheduled(initialDelay = 5000, fixedRate = 1900)
     public void sendMessage() {
 
         if (counter == 10) {
             System.out.println("Produced 10 messages, stopping producer.");
         }
         if (counter >= 10) {
+            counter++;
             return;
         }
         
