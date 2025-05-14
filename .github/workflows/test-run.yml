@@ -1,0 +1,34 @@
+name: Test Kafka connection on all envs
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_kafka_test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [dev]
+    continue-on-error: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17' # Adjust if you use a different Java version
+
+      - name: Grant execute permission to Gradle wrapper
+        run: chmod +x gradlew
+
+      - name: Build the app with Gradle
+        run: ./gradlew clean build
+
+      - name: Run the JAR
+        run: java -jar build/libs/*.jar
