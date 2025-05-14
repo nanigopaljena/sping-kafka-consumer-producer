@@ -14,7 +14,7 @@ import java.util.Date;
 public class TestProducer {
 
     @Value("${spring.kafka.bootstrap-servers}")
-    private String topicName;
+    private String bootstrapServer;
 
     @Value("${spring.kafka.topic-name}")
     private String topicName;
@@ -34,10 +34,10 @@ public class TestProducer {
 
     @Scheduled(initialDelay = 10000, fixedRate = 1900)
     public void sendMessage() {
-        System.out.println("bootstrap server: " + topicName);
+        System.out.println("Bootstrap server: " + bootstrapServer);
         System.out.println("Topic name: " + groupId);
         System.out.println("groupId name: " + groupId);
-        
+
         String message = "Message number: #" + counter++;
         kafkaTemplate.send(topicName, message);
         if(counter==1){
