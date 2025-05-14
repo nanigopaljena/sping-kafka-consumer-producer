@@ -13,8 +13,14 @@ import java.util.Date;
 @Profile({"produce","produce-consume"})
 public class TestProducer {
 
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String topicName;
+
     @Value("${spring.kafka.topic-name}")
     private String topicName;
+
+    @Value("${spring.kafka.group-id}")
+    private String groupId;
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
@@ -28,6 +34,10 @@ public class TestProducer {
 
     @Scheduled(initialDelay = 10000, fixedRate = 1900)
     public void sendMessage() {
+        System.out.println("bootstrap server: " + topicName);
+        System.out.println("Topic name: " + groupId);
+        System.out.println("groupId name: " + groupId);
+        
         String message = "Message number: #" + counter++;
         kafkaTemplate.send(topicName, message);
         if(counter==1){

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 @Service
 @Profile({"consume","produce-consume"})
 public class TestConsumer {
+    private int consumeCount = 0;
+    
+
     TestConsumer(){
         System.out.println("--------------------------");
         System.out.println("Consumer started...");
@@ -15,6 +18,14 @@ public class TestConsumer {
     @KafkaListener(topics = "${spring.kafka.topic-name}", groupId = "${spring.kafka.group-id}")
     public void listen(String message) {
         System.out.println("Consumed: " + message);
+        consumeCount++;
+        
+        if (consumeCount >= 10) {
+            System.out.println("------------------------------");
+            System.out.println("Consumed 10 messages, exiting at: " + new Date());
+            System.out.println("------------------------------");
+            System.exit(0); // Forcefully terminate the app
+        }
     }
 }
 
